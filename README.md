@@ -7,6 +7,10 @@ Management API, fetches API keys, writes `.env`, applies the initial schema
 migration, disables email confirmation for development, and runs `npm install`.
 All in one shot.
 
+## Requirements
+
+Only **Node.js ≥ 20** is required on your machine. Git and `gh` are not needed.
+
 ## Usage
 
 ```bash
@@ -21,7 +25,7 @@ You will be prompted for:
 4. **Organization** (new project only, skipped if you only have one)
 5. **Region** (new project only) — pick the one closest to you
 6. **OpenRouter API key** (optional) — enables the AI Assistant feature
-7. **GitHub authorization** — opens a browser so you can authorize the CLI to download the private template
+7. **GitHub authorization** — opens a browser so you can authorize the CLI to download the template
 
 ## Flags (non-interactive / Claude Code integration)
 
@@ -52,60 +56,7 @@ npx create-vue-starter my-app \
 | `VUESTARTER_PAT` | Read if `--pat` omitted |
 | `VUESTARTER_GH_TOKEN` | Read if `--gh-token` omitted |
 | `VUESTARTER_OPENROUTER_KEY` | Read if `--openrouter-key` omitted |
-| `VUESTARTER_GH_CLIENT_ID` | GitHub OAuth App client ID (used for device-flow auth; has a default) |
 | `DEBUG=1` | Print full stack traces on error |
-
-## Architecture
-
-```
-src/
-  index.ts        — main flow orchestration (two-phase: prompt, then execute)
-  cli.ts          — arg parsing + --help
-  prompts.ts      — @clack/prompts wrappers
-  github.ts       — OAuth device flow + tarball download
-  supabase.ts     — Management API client
-  migration.ts    — initial schema runner (uses Management API /database/query)
-  env.ts          — .env writer + DB password generator
-  install.ts      — npm install runner
-  regions.ts      — Supabase region list
-  logger.ts       — coloured output
-  constants.ts    — template coords, endpoints, polling config
-  types.ts        — shared types
-```
-
-## Prerequisites for end users
-
-Only **Node.js ≥ 20** is required on the user's machine. Git and `gh` are not
-needed — the CLI downloads the template tarball directly via the GitHub API
-using OAuth device flow (or a user-supplied GitHub token).
-
-## Local development
-
-```bash
-npm install
-npm run build
-npm link
-create-vue-starter test-app
-```
-
-Or in watch mode:
-
-```bash
-npm run dev
-```
-
-## GitHub OAuth app setup (one-time, maintainers)
-
-The device-flow auth needs a GitHub OAuth app registered under the Loqode org:
-
-1. Go to [github.com/settings/developers](https://github.com/settings/developers) → **New OAuth App**
-2. Application name: `create-vue-starter`
-3. Homepage URL: https://vuestarter.com
-4. Authorization callback URL: anything valid (e.g. `https://vuestarter.com`) — unused for device flow
-5. After creating, enable **Device flow** in the app settings
-6. Copy the Client ID and publish it in the CLI via `VUESTARTER_GH_CLIENT_ID` (or hardcode in `src/constants.ts`)
-
-The Client ID is **not** a secret — safe to hardcode and publish.
 
 ## Security notes
 
