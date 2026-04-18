@@ -1,6 +1,6 @@
 {
   "name": "@loqode/create-vue-starter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Scaffold a VueStarter app — clones the template, creates a Supabase project, runs migrations, and wires up .env in one command.",
   "type": "module",
   "bin": {

@@ -14,7 +14,7 @@ Only **Node.js ≥ 20** is required on your machine. Git and `gh` are not needed
 ## Usage
 
 ```bash
-npx @loqode/create-vue-starter
+npx @loqode/create-vue-starter@latest
 ```
 
 You will be prompted for:
@@ -30,7 +30,7 @@ You will be prompted for:
 ## Flags (non-interactive / Claude Code integration)
 
 ```bash
-npx @loqode/create-vue-starter my-app \
+npx @loqode/create-vue-starter@latest my-app \
   --pat=sbp_xxxxxxxxxxxxxxxx \
   --region=us-east-1 \
   --gh-token=ghp_xxxxxxxxxxxxxxxx
