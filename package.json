@@ -4,7 +4,7 @@
   "description": "Scaffold a VueStarter app — clones the template, creates a Supabase project, runs migrations, and wires up .env in one command.",
   "type": "module",
   "bin": {
-    "create-vue-starter": "./dist/index.js"
+    "create-vue-starter": "dist/index.js"
   },
   "files": [
     "dist",
